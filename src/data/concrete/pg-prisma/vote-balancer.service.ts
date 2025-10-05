@@ -7,12 +7,10 @@ export class VoteBalancer implements ISuggestionsService {
   constructor(private readonly wrappedService: ISuggestionsService) {}
 
   public getAll(): Promise<ReadonlyArray<SuggestionModel>> {
-    console.log("getAll");
     return this.wrappedService.getAll();
   }
 
   public getOne(id: string): Promise<SuggestionModel | null> {
-    console.log("getOne");
     return this.wrappedService.getOne(id);
   }
 

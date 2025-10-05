@@ -53,7 +53,6 @@ export class SuggestionService implements ISuggestionsService {
       }
 
       this._ipVotes.set(clientIp, this.getIpVotes(clientIp) + 1);
-      console.log(JSON.stringify(Array.from(this._ipVotes.entries()), null, 2));
       return true;
     });
   }
