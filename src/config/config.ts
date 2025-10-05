@@ -8,4 +8,5 @@ export const config: AppConfig = {
   voteLimit: Number(process.env.VOTE_LIMIT) || 10,
   host: String(process.env.HOST) || "0.0.0.0",
   nodeEnv: process.env.NODE_ENV || "development",
+  databaseUrl: process.env.DATABASE_URL || "",
 };

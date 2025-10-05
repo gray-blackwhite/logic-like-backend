@@ -1,7 +1,8 @@
-import { Suggestion } from "./models/suggestion";
+import { SuggestionModel } from "./models/suggestion.model";
 
 export interface ISuggestionsService {
-  getAll(clientIp: string): Promise<ReadonlyArray<Suggestion>>;
-  getOne(id: string, clientIp: string): Promise<Suggestion | null>;
+  getAll(): Promise<ReadonlyArray<SuggestionModel>>;
+  getOne(id: string): Promise<SuggestionModel | null>;
   vote(id: string, clientIp: string): Promise<boolean>;
+  getIpVotesNumber(clientIp: string): Promise<number>;
 }

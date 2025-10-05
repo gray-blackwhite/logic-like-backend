@@ -33,7 +33,7 @@ const getIPInternal = function (req: Request): string | undefined {
   return ip;
 };
 
-const getIP = function (req: Request, _res: Response, next: NextFunction): void {
+export const getIP = function (req: Request, _res: Response, next: NextFunction): void {
   const ip = getIPInternal(req);
   if (!ip) {
     _res.status(400).send("Bad Request").end();
@@ -42,5 +42,3 @@ const getIP = function (req: Request, _res: Response, next: NextFunction): void 
     next();
   }
 };
-
-export default getIP;

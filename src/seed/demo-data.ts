@@ -1,5 +1,5 @@
-import { Suggestion } from "../data/contract";
-export const demoData: Omit<Suggestion, "votes" | "voted">[] = [
+import { SuggestionModel } from "../data/contract";
+export const demoData: Omit<SuggestionModel, "votedIPs">[] = [
   {
     id: "oh7bt4o4y0j7ojyofpsn4",
     name: "Интерактивные уроки",

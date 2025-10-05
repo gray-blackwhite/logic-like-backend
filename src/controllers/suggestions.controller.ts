@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { dataProvider } from "../../data/data-provider";
+import { applicationService } from "../domain/services";
 
-const { suggestions } = dataProvider;
+const appService = applicationService();
 
 const withCatch: (fn: () => Promise<void>, next: NextFunction) => Promise<void> = async (fn, next) => {
   try {
@@ -13,7 +13,7 @@ const withCatch: (fn: () => Promise<void>, next: NextFunction) => Promise<void> 
 
 const getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   await withCatch(async () => {
-    const result = await suggestions.getAll(req.clientIp);
+    const result = await appService.getAll(req.clientIp);
     res.json(result).end();
   }, next);
 };
@@ -26,7 +26,7 @@ const getOne = async (req: Request, res: Response, next: NextFunction): Promise<
       return;
     }
 
-    const result = await suggestions.getOne(id, req.clientIp);
+    const result = await appService.getOne(id, req.clientIp);
     if (result === null) {
       res.status(404).send(`Suggestion with id ${id} not found`).end();
       return;
@@ -44,25 +44,17 @@ const vote = async (req: Request, res: Response, next: NextFunction): Promise<vo
       return;
     }
 
-    const voteResult = await suggestions.vote(id, req.clientIp);
+    const voteResult = await appService.vote(id, req.clientIp);
     if (!voteResult) {
       res.status(409).send("Conflict").end();
       return;
     }
 
-    const result = await suggestions.getOne(id, req.clientIp);
-    if (result === null) {
-      res.status(404).send(`Suggestion with id ${id} not found`).end();
-      return;
-    }
-
-    res.json(result).end();
+    res.json(voteResult).end();
   }, next);
 };
 
-const suggestionsRouter = Router();
-suggestionsRouter.get("/", getAll);
-suggestionsRouter.get("/:id", getOne);
-suggestionsRouter.get("/vote/:id", vote);
-
-export default suggestionsRouter;
+export const suggestionsController = Router();
+suggestionsController.get("/", getAll);
+suggestionsController.get("/:id", getOne);
+suggestionsController.get("/vote/:id", vote);

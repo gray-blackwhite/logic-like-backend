@@ -3,4 +3,5 @@ export type AppConfig = {
   host: string;
   voteLimit: number;
   nodeEnv: string;
+  databaseUrl: string;
 };

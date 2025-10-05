@@ -2,13 +2,13 @@ import express from "express";
 import http from "http";
 import { AddressInfo } from "net";
 import { config } from "./config";
-import suggestionsRouter from "./controllers/suggestions/controller";
-import getIP from "./middleware/get-ip";
+import { suggestionsController } from "./controllers";
+import { getIP } from "./middleware";
 
 const app = express();
 app.use(getIP);
 app.use(express.json());
-app.use("/api/suggestions", suggestionsRouter);
+app.use("/api/suggestions", suggestionsController);
 
 const server = http.createServer(app);
 server.listen(
