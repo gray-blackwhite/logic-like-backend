@@ -46,7 +46,7 @@ const vote = async (req: Request, res: Response, next: NextFunction): Promise<vo
 
     const voteResult = await appService.vote(id, req.clientIp);
     if (!voteResult) {
-      res.status(409).send("Conflict").end();
+      res.status(409).send("Unable to vote right now").end();
       return;
     }
 

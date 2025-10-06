@@ -42,3 +42,10 @@ export const getIP = function (req: Request, _res: Response, next: NextFunction)
     next();
   }
 };
+
+export const getFakeIP = function (req: Request, _res: Response, next: NextFunction): void {
+  const fn = () => Math.round(Math.random() * 255);
+
+  req.clientIp = `${fn()}.${fn()}.${fn()}.${fn()}`;
+  next();
+};

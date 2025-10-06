@@ -3,12 +3,18 @@ import http from "http";
 import { AddressInfo } from "net";
 import { config } from "./config";
 import { suggestionsController } from "./controllers";
-import { getIP } from "./middleware";
+import { cors, getFakeIP, getIP } from "./middleware";
+import { errorHandler } from "./middleware/error-handler";
 
 const app = express();
+app.use(cors());
 app.use(getIP);
+// app.use(getFakeIP);
 app.use(express.json());
+
 app.use("/api/suggestions", suggestionsController);
+
+app.use(errorHandler);
 
 const server = http.createServer(app);
 server.listen(

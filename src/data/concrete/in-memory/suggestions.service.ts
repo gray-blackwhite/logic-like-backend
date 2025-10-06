@@ -22,7 +22,7 @@ export class SuggestionService implements ISuggestionsService {
   public getAll(): Promise<ReadonlyArray<SuggestionModel>> {
     return this.withPromise(() => {
       const array = Array.from(this._items.values());
-      return array.map(this.mapModel);
+      return array.map(this.mapModel).sort((a, b) => b.votedIPs.size - a.votedIPs.size);
     });
   }
 
