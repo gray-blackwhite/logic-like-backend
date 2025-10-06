@@ -21,5 +21,5 @@ Typescript, Express, Prisma.
 1. `$ npm install`
 2. `$ npx prisma generate`, опционально, если хотим чтобы решение собралось до запуска миграции.
 3. `$ npx prisma migrate dev --name init`, создает базу (требуется `DATABASE_URL` переменная) и выполняет миграцию.
-4. `npx prisma db seed`, запускает seed для базы.
+4. `$ npx prisma db seed`, запускает seed для базы.
 5. `$ npm run dev`
